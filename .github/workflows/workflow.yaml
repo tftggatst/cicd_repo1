@@ -80,8 +80,7 @@ jobs:
         cd cicd_repo2
         git config user.name "tftggatst"
         git config user.email "tftggatst@gmail.com"
-        touch test-file.txt
-        echo "test" >> test-file.txt
+        sed -i 's/^  tag: .*/  tag: ${{ env.DOCKER_IMAGE_TAG }}/g' values.yaml         
         git add .
         git commit -m "Add test file"
         git push https://token:${{ env.GH_TOKEN }}@github.com/tftggatst/cicd_repo2.git
