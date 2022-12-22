@@ -84,6 +84,6 @@ jobs:
         echo "test" >> test-file.txt
         git add .
         git commit -m "Add test file"
-        git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
+        git config --unset-all http.https://github.com/.extraheader
         git push https://token:$GH_TOKEN@github.com/tftggatst/cicd_repo2.git
         
