@@ -70,3 +70,21 @@ jobs:
         context: ./${{ matrix.project }}
         push: true
         tags: gcr.io/sandbox3-372220/tftggatst:${{ env.DOCKER_IMAGE_TAG }}
+
+    - name: Update helm chart in another repository
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      env:
+        GITHUB_TOKEN: ${{ secrets.CICD2_GITHUB_TOKEN }}
+      run: |
+        git clone https://github.com/tftggatst/cicd_repo2.git
+
+        cd cicd_repo2
+        git config user.name "tftggatst"
+        git config user.email "tftggatst@gmail.com"
+
+        touch test-file.txt
+        git add .
+        git commit -m "Add test file"
+
+        git push origin main
+        
