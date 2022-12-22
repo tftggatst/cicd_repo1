@@ -47,12 +47,12 @@ jobs:
     - name: Sets tag for PR
       if: github.event_name != 'push'
       run: |
-        echo "DOCKER_IMAGE_TAG=${{github.event.pull_request.number}}" >> $GITHUB_ENV      
+        echo "DOCKER_IMAGE_TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV      
 
     - name: Set tag for merge to main
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
-        echo "DOCKER_IMAGE_TAG=latest" >> $GITHUB_ENV
+        echo "DOCKER_IMAGE_TAG=$(cat version.txt)" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
