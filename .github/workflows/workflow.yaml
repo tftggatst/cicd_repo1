@@ -81,8 +81,11 @@ jobs:
         cd cicd_repo2
         git config user.name "tftggatst"
         git config user.email "tftggatst@gmail.com"
+        git config --unset-all http.https://github.com/.extraheader
+
 
         touch test-file.txt
+        echo "test" >> test-file.txt
         git add .
         git commit -m "Add test file"
 
